@@ -53,3 +53,8 @@ def test_filter_returns_single_matching_from_many() -> None:
     result = _filter_by_item_id(interactions, 3)
     assert len(result) == 1
     assert result[0].item_id == 3
+
+def test_filter_excludes_interaction_with_different_learner_id() -> None:
+    interaction = _make_log(id=1, learner_id=1, item_id=2)
+    result = _filter_by_item_id([interaction], item_id=1)
+    assert len(result) == 0
